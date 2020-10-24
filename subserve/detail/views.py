@@ -9,7 +9,6 @@ from sublist.models import Subscribes
 from django.contrib.auth.models import User
 from .forms import StoreForm
 from django.utils import timezone
-from dateutil.relativedelta import relativedelta
 from datetime import datetime
 # Create your views here.
 def detail(request, storeID) :
@@ -50,7 +49,7 @@ def submenu(request,menu_id, store_id):
     user= request.user
     current = datetime.now()
     s = Subscribes(user_id=user.customer, store_id=menuContext.store_id, menu_id=menuContext,
-    start_date = current, end_date = current+relativedelta(months=1), remain = menuContext.count)
+    start_date = current, end_date = current+timedelta(days=30), remain = menuContext.count)
     s.save()
     return render(request,'submenu.html',{'menu':menuContext, 'user':user})
 
