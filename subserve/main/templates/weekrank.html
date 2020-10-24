@@ -35,15 +35,15 @@
         <!-- 중앙 카드 그리드 -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 maincenter">
                 <div id="rank-down">
-                    {% for store in stores.all  %}
+                    {% for menu in menus.all  %}
                         <div class="card bg-dark text-white">
-                            <img src="{{ store.photo.url }}" class="card-img brightness" alt="..." style="object-fit: cover; width: auto; height: 200px;">
+                            <img src="{{ menu.photo.url }}" class="card-img brightness" alt="..." style="object-fit: cover; width: auto; height: 200px;">
                             <div class="card-img-overlay">
                                 <h5><strong class="rank-rank">♕ {{forloop.counter}}위 ♕</strong></h5>
                                 <br>
-                                <h5><a href="{% url 'detail' store.id %}" class="rank-title">{{ store.storename }}</a></h5>
+                                <h5><a href="{% url 'detail' menu.store_id.id%}" class="rank-title">{{ menu.menu_name }}</a></h5>
                                 
-                                <p class="rank-text">｜ {{store.description}}</p>
+                                <p class="rank-text">｜ {{menu.description}}</p>
                             </div>
                         </div>
                         <br>

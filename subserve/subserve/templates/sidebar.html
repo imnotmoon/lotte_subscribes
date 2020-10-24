@@ -2,7 +2,11 @@
     <div class="menuShop">
 		<ul class="mmenu">
             <li>
-                <a href="{% url 'weekrank' %}" data-category="" class="sidebar-top">이주의 섭섭</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'weekrank' %}" data-category="" class="sidebar-top">{{user.customer.name}}님 안녕하세요!</a>
+                {% else %}
+                    <a href="{% url 'mypage' %}" data-category="" class="sidebar-top">로그인</a>
+                {% endif %}
             </li>
             <hr>
             {% if user.is_authenticated %}
@@ -65,9 +69,9 @@
         color: #ED1C24;
     }
     #sidebarMenu {
-        position: fixed;
+        position: absolute;
         left: 0px;
-        top: 150px;
+        top: 300px;
         width: 300px;
         z-index: 950;
         font-family: 'MapoPeacefull';
@@ -143,6 +147,12 @@
                 return;
           }
         })
+    }
+
+    // navbar 바로밑에 고정
+    window.onload = function() {
+        navbarHeight = document.getElementById('topNavBar').offsetHeight;
+        document.getElementById('sidebarMenu').style.top = navbarHeight + 'px';
     }
 
 </script>

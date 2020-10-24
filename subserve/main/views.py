@@ -73,8 +73,8 @@ def sidebarData(request) :
     return HttpResponse(json.dumps(ret), content_type="text/json-comment-filtered")
 
 def weekrank(request) :
-    stores = Store.objects.all().order_by('rank')[:10]
-    return render(request, 'weekrank.html', {'stores' : stores})
+    menu = Menu.objects.all().order_by('rank')[:10]
+    return render(request, 'weekrank.html', {'menus' : menu})
 
 def manager(request) :
     return render(request, 'manager.html')

@@ -45,9 +45,8 @@
                     <div class="carouselcss">
                       <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
                       <div class="carousel-caption text-left">
-                        <h1>Example headline.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p> -->
+                        <h1 id="carousel1-title">Example headline.</h1>
+                        <p id="carousel1-title">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                       </div>
                     </div>
                   </div>
@@ -55,9 +54,8 @@
                     <div class="carouselcss">
                       <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
                       <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p> -->
+                        <h1 id="carousel2-title">Another example headline.</h1>
+                        <p id="carousel2-text">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                       </div>
                     </div>
                   </div>
@@ -65,8 +63,8 @@
                     <div class="carouselcss">
                       <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
                       <div class="carousel-caption text-right">
-                        <h1>One more for good measure.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <h1 id="carousel3-title">One more for good measure.</h1>
+                        <p id="carousel3-text">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                         <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p> -->
                       </div>
                     </div>
@@ -81,7 +79,7 @@
                   <span class="sr-only">Next</span>
                 </a>
               </div>
-              <a href="store/create">가게추가</a>
+              <!-- <a href="store/create">가게추가</a> -->
             <div class="album py-5">
               <div class="">
                 <div class="row" id="store-cards">
@@ -99,11 +97,11 @@
                               <a class="grid-storedetail" style="text-decoration : none">  ｜ {{store.description}}</a></p>
                               <div class="d-flex justify-content-between align-items-center textbottom">
                                   <div class="btn-group">
-                                  <button type="button" class="btn-sm btn-view" onclick="toDetailPage('{{forloop.counter}}')">VIEW｜</button>
+                                  <button type="button" class="btn-sm btn-view" onclick="toDetailPage('{{store.id}}')">VIEW｜</button>
                                   </div>
                                   
                               </div>
-                              <small class="grid-storerank">{{store.rank}}위</small>
+                              <!-- <small class="grid-storerank">{{store.rank}}위</small> -->
                             </div>
                         </div>
                     </div>
@@ -127,42 +125,10 @@
 
       function toDetailPage(idx) {
         let url = "{% url 'detail' 1 %}";
-        window.location.href = url.replace("1", idx-1);
+        window.location.href = url.replace("1", idx);
       }
 
       let count = 0;
-
-      window.onscroll = function scroll() {
-        if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        let url = "{% url 'loadmoredata' %}";
-        const csrftoken = Cookies.get('csrftoken');
-        $.ajax({
-          url: url,
-          headers : {'X-CSRFToken' : csrftoken},
-          data : {'count' : count},
-          type: 'post',
-          success : (res) => {
-            res.forEach((store) => {
-              let data = store['fields'];
-              var addContent = '<div class="col-md-4"> <div class="card">';
-              addContent += '<rect width="100%" height="100%" style="text-align: center;"> <img src="' + ('/media/' + data.photo) + '" ';
-              addContent += 'alt="" width="250px" height="250px" style="text-align: center;"></rect><div class="card-body">';
-              addContent += '<p class="card-text"> <h5 class="grid-storename">' + data.storename  + '</h5>' +'<a class="grid-storedetail" style="text-decoration : none">' + '  ｜ ' + data.description+'</a>' + '</p>';
-              addContent += '<div class="d-flex justify-content-between align-items-center textbottom"> <div class="btn-group">';
-              addContent += '<button type="button" class="btn-sm btn-view" onclick="toDetailPage('+ (count%numCards+1) +')">VIEW</button>';
-              addContent += '</div> </div> <small class="grid-storerank">'+store.rank+'위</small></div> </div> </div>';
-              $('#store-cards').append(addContent);
-              count += 1;
-            })
-          },
-          error : (err) => {
-              console.log(err);
-              return;
-          }
-        })
-      }
-    }
-
 
     </script>
     <div class="topbutton">

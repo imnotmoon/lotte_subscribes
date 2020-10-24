@@ -17,6 +17,7 @@ class Menu(models.Model):
     last_subscribers=models.IntegerField(null = True)
     discount=models.IntegerField(null = True)
     in_event=models.BooleanField(null = True)
+    rank=models.IntegerField(null=True, default=100)
 
     def __str__(self) :
         return str(self.store_id) + " -- " + self.menu_name
