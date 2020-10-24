@@ -39,9 +39,11 @@
                         <div class="card bg-dark text-white">
                             <img src="{{ store.photo.url }}" class="card-img brightness" alt="..." style="object-fit: cover; width: auto; height: 200px;">
                             <div class="card-img-overlay">
-                                <h5><strong class="card-text">{{forloop.counter}}위</strong></h5>
-                                <h5 class="card-title"><a href="{% url 'detail' store.id %}">{{ store.storename }}</a></h5>
-                                <p class="card-text">{{store.description}}</p>
+                                <h5><strong class="rank-rank">♕ {{forloop.counter}}위 ♕</strong></h5>
+                                <br>
+                                <h5><a href="{% url 'detail' store.id %}" class="rank-title">{{ store.storename }}</a></h5>
+                                
+                                <p class="rank-text">｜ {{store.description}}</p>
                             </div>
                         </div>
                         <br>
@@ -58,7 +60,7 @@
      
     <div class="topbutton">
       <a href="#">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#A6C2CD" width="100px" height="100px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.29 8.71L6.7 13.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L12.7 8.71c-.38-.39-1.02-.39-1.41 0z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ED1C24" width="100px" height="100px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.29 8.71L6.7 13.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L12.7 8.71c-.38-.39-1.02-.39-1.41 0z"/></svg>
       </a>
     </div>
 </body>
@@ -88,8 +90,29 @@
 
   .card {
       height: 200px;
+      margin-bottom: 20px;
+      width: 90%;
   }
 
   .brightness {-webkit-filter: brightness(0.30);filter: brightness(0.30);}
+
+  .rank-rank{
+    font-family: 'MapoPeacefull';
+    color: white;
+    font-size: 40px;
+  }
+
+  .rank-title{
+    font-family: 'MapoPeacefull';
+    color: white;
+    font-size: 30px;
+    font-weight: 900;
+  }
+  .rank-text{
+    font-family: 'MapoPeacefull';
+    color: #ACACAC;
+    font-size: 15px;
+    font-weight: 500;
+  }
 
 </style>

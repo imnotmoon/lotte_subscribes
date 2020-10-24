@@ -21,12 +21,12 @@
         <!-- 좌측 사이드바 종료 -->
 
         <!-- 중앙 결제 화면 -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <main role="main" class="col-md-9 col-lg-10 px-md-4 main-center">
             <div>
-                <h2>결제 페이지</h2>
-                <h5>{{menu}}</h5>
+                <h2 class="purch-head">결제 페이지</h2>
+                <h5 class="purch-menu">{{menu}}</h5>
                 <br>
-                <div class="grid-3-top">
+                <div class="grid-3-top purch-top">
                     <div>
                         <h5>구독 정보</h5>
                     </div>
@@ -41,13 +41,17 @@
                 <div class="grid-3-top">
                     <div class="grid-2">
                         <img src="{{menu.photo.url}}" alt="menu_photo1" class="menu-photo">
-                        <div>
-                            <p>{{menu.description}}</p>
+                        <div class="purch-detailil">
+                            <br>
                             <p>{{menu.count}} 회 / {{menu.cycle}} 주</p>
                         </div>
                     </div>
-                    <div> - </div>
-                    <div>{{menu.price}}원</div>
+                    <div class="purch-detailil">
+                        <br>
+                         - </div>
+                    <div class="purch-detailil">
+                        <br>
+                        {{menu.price}}원</div>
                 </div>
             </div>
 
@@ -56,16 +60,16 @@
 
             <hr>
             <div>
-                <h5>본인인증</h5>
+                <h5 class="purch-topname">본인인증</h5>
                 <br>
-                <div>이메일 인증</div>
+                <div class="purch-email">이메일 인증</div>
             </div>
 
             <br>
             <br>
             <hr>
             <div>
-                <h5>배송지 정보</h5>
+                <h5 class="purch-topname">배송지 정보</h5>
                 <br>
                 <form action="" style="margin-left: 20px;">
                 <table>
@@ -89,50 +93,41 @@
                 </form>
 
                 <input type="checkbox" name="same-with-userinfo" id="user-same" onclick="fillInfo()" value="false">
-                <label for="user-same">회원정보와 동일</label>
+                <label for="user-same" class="cell-title">회원정보와 동일</label>
             </div>
 
+            <br>
+            <br>
+            <hr class="purch-hr">
+            <h5 class="purch-topname">약관동의</h5>
+            <br>
+            <div class="purch-prom">
+                
+                <p>
+                    전자금융거래 기본약관
+                    제1조 (목적) 
+                    이 약관은 주식회사 케이지이니시스(이하 '회사'라 합니다)가 제공하는 전자지급결제대행서비스 및 결제대금예치서비스를 이용자가 이용함에 있어 회사와 이용자 사이의 전자금융거래에 관한 기본적인 사항을 정함을 목적으로 합니다. 
+                    제2조 (용어의 정의)
+                    이 약관에서 정하는 용어의 정의는 다음과 같습니다. 
+                    1. '전자금융거래'라 함은 회사가 전자적 장치를 통하여 전자지급결제대행서비스 및 결제대금예치서비스(이하 '전자금융거래 서비스'라고 합니다)를 제공하고, 이용자가 회사의 종사자와 직접 대면하거나 의사소통을 하지 아니하고 자동화된 방식으로 이를 이용하는 거래를 말합니다. 
+                    2. '전자지급결제대행서비스'라 함은 전자적 방법으로 재화의 구입 또는 용역의 이용에 있어서 지급결제정보를 송신하거나 수신하는 것 또는 그 대가의 정산을 대행하거나 매개하는 서비스를 말합니다.
+                    3. '결제대금예치서비스'라 함은 이용자가 재화의 구입 또는 용역의 이용에 있어서 그 대가(이하 '결제대금'이라 한다)의 전부 또는 일부를 재화 또는 용역(이하 '재화 등'이라 합니다)을 공급받기 전에 미리 지급하는 경우, 회사가 이용자의 물품수령 또는 서비스 이용 확인 시점까지 결제대금을 예치하는 서비스를 말합니다.
+                </p>
+            </div>
             <br>
             <br>
             <hr>
-            
             <div>
-                <h5>결제수단</h5>
+                <h5 class="purch-topname">결제수단</h5>
                 <br>
                 <div class="purchase-type-box">
-                    <div class="grid-3">
-                        <button class="purchase-type-btn">신용/체크카드</button>
-                        <button class="purchase-type-btn">무통장 입금</button>
-                        <button class="purchase-type-btn">휴대폰 소액결제</button>
+                    <div>
+                        <button class="purch-purch"><a href="{% url 'subscribe' store_id=menu.store_id.id menu_id=menu.menu_id %}" class="purch-btn">신용/체크카드</a></button>
                     </div>
                 </div>
             </div>
-
             <br>
             <br>
-
-            <div id="summary">
-
-            </div>
-
-            <br>
-            <br>
-
-            <div>
-                <h5>약관동의</h5>
-            </div>
-
-            <br>
-            <br>
-            <br>
-
-            <div>
-                <button id="done"><a href="{% url 'subscribe' store_id=menu.store_id.id menu_id=menu.menu_id %}">결제하기</a></button>
-            
-            </div>
-
-
-
         <!-- 결제 화면 종료 -->
         </main>
     </div>
@@ -164,6 +159,29 @@
 </script>
 
 <style>
+    .purch-hr{
+        background-color: #ED1C24;
+    }
+    .purch-head{
+        font-family: 'MapoPeacefull';
+        color:#ED1C24;
+        font-size: 50px;
+        font-weight: 900;
+        margin-bottom: 50px;
+    }
+    .purch-menu{
+        font-family: 'MapoPeacefull';
+        color:#757575;
+        font-size: 30px;
+        font-weight: 900;
+        margin-bottom: 30px;
+    }
+    .purch-btn{
+        font-family: 'MapoPeacefull';
+        color:white;
+        font-size: 20px;
+        font-weight: 500;
+    }
     #main {
         color: #a6c2cd;
         margin: 3% 10% 5% 10%;
@@ -180,7 +198,18 @@
         grid-template-columns: 2fr 1fr 1fr;
         text-align: center;
     }
-
+    .purch-top {
+        font-family: 'MapoPeacefull';
+        color:#ED1C24;
+        font-size: 25px;
+        font-weight: 700;
+    }
+    .purch-topname {
+        font-family: 'MapoPeacefull';
+        color:#757575;
+        font-size: 27px;
+        font-weight: 700;
+    }
     .grid-2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -191,40 +220,72 @@
         width: 30%;
     }
 
-    #summary {
-        background-color: #a6c2cd;
-        width: 100%;
-        height: 200px;
+    .purch-prom {
+        border-radius: 5px;
+        border: 1px solid #ACACAC;
+        font-family: 'MapoPeacefull';
+        color: #ACACAC;
+        font-size: 15px;
     }
 
     .input-text-box {
-        border: 1px solid #a6c2cd;
-        border-radius: 20px;
+      border: 1px solid #ACACAC;
+      border-radius: 5px;
+      width: 50%;
+      max-width: 100%;
+      font-family: 'MapoPeacefull';
+      font-size: 15px;
     }
 
-    #done {
-        background-color: #FF6754;
-        border: none;
+    .purch-purch {
+        border: 1.5px solid #ED1C24;
+        color: #ED1C24;
         border-radius: 5px;
-        color: white;
+        background-color: #ED1C24;
         width: 150px;
         height: 50px;
-        margin-left: 40%;
+        font-size: medium;
+        text-decoration: none;
+        align-items: center;
+        font-family: 'MapoPeacefull';
+        position:relative;
+        cursor:pointer;
+        transition:800ms ease all;
+        outline:none;
+        margin: 0px auto;
+    }
+    .purch-purch:hover{
+        background:#fff;
+        border: none;
+        color : #ED1C24;
+    }
+   
+    .purch-purch:before, .purch-purch:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background:#ED1C24;
+    transition:400ms ease all;
+    }
+
+    .purch-purch:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+    }
+
+    .purch-purch:hover:before, .purch-purch:hover:after{
+    width:100%;
+    transition:800ms ease all;
     }
 
     .menu-photo {
-        width: 150px;
-        height: 100px;
-    }
-
-    .purchase-type-btn {
-        border: 1px solid #a6c2cd;
-        border-radius: 5px;
-        background-color: white;
-        color: #a6c2cd;
-        width: 120px;
-        height: 40px;
-        margin-left: 20px;
+        width: 200px;
+        height: 200px;
     }
 
     table {
@@ -237,13 +298,32 @@
     }
 
     .cell-title {
-        width: 20%;
+        width: 30%;
+        font-family: 'MapoPeacefull';
+        font-size: 15px;
+        color: #757575;
+        
+    }
+    .purch-email {
+        width: 30%;
+        font-family: 'MapoPeacefull';
+        font-size: 15px;
+        color: #757575;
+        margin-left: 20px;
+    }
+    .purch-detailil {
+        font-family: 'MapoPeacefull';
+        font-size: 15px;
+        color: #757575;
     }
 
     tr {
         width: 100%;
         height: 50px;
-        border-bottom: 1px solid #a6c2cd;
+        border-bottom: 1px solid #757575;
+    }
+    .main-center{
+        margin: 0px auto;
     }
 </style>
 

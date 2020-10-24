@@ -1,24 +1,24 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse slide-in" style="color: black;">
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse slide-in">
     <div class="menuShop">
 		<ul class="mmenu">
             <li>
-                <a href="{% url 'weekrank' %}" data-category="">이주의 섭섭</a>
+                <a href="{% url 'weekrank' %}" data-category="" class="sidebar-top">이주의 섭섭</a>
             </li>
             <hr>
             {% if user.is_authenticated %}
 			<li>
-				<a data-menu="submenu" href="#">sub list</a>
+				<a data-menu="submenu" href="#" class="sidebar-top">sub list</a>
 				<ul class="smenu" id="sidebar-sublist">
-                    <li><a href="" data-category="">모든 구독목록</a></li>
+                    <li><a href="" data-category="">· sub all</a></li>
                 </ul>
             </li>
             <hr>
 			<li>
-				<a data-menu="submenu" href="#">wish list</a>
-				<ul class="smenu"><li><a href="" data-category="">wish all</a></li>
-					<li><a href="" data-category="">wish1</a></li>
-					<li><a href="" data-category="">wish2</a></li>
-					<li><a href="" data-category="">wish3</a></li>
+				<a data-menu="submenu" href="#" class="sidebar-top">wish list</a>
+				<ul class="smenu"><li><a href="" data-category="">· wish all</a></li>
+					<li><a href="" data-category="">· wish1</a></li>
+					<li><a href="" data-category="">· wish2</a></li>
+					<li><a href="" data-category="">· wish3</a></li>
 					<!--li><a href="/product/list.html?cate_no=50" data-category="50">pero 3 way</a></li-->
 					
                 </ul>
@@ -26,24 +26,24 @@
             <hr>
             {% else %}
             <li>
-				<a data-menu="submenu" href="#">인기 지역</a>
+				<a data-menu="submenu" href="#" class="sidebar-top">인기 지역</a>
 				<ul class="smenu" id="sidebar-sublist">
-                    <li><a href="" data-category="">잠실</a></li>
-					<li><a href="" data-category="">화전</a></li>
-					<li><a href="" data-category="">행신</a></li>
-					<li><a href="" data-category="">연신내</a></li>
+                    <li><a href="" data-category="" >· 잠실</a></li>
+					<li><a href="" data-category="">· 화전</a></li>
+					<li><a href="" data-category="">· 행신</a></li>
+					<li><a href="" data-category="">· 연신내</a></li>
                 </ul>
             </li>
             <hr>
 
             {% endif %}
 			<li>
-				<a data-menu="submenu" href="#">category</a>
-				<ul class="smenu"><li><a href="" data-category="">cate all</a></li>
+				<a data-menu="submenu" href="#" class="sidebar-top">category</a>
+				<ul class="smenu"><li><a href="" data-category="">· cate all</a></li>
 					<!--li><a href="/product/list.html?cate_no=53" data-category="53">neater</a></li-->
-					<li><a href="" data-category="">cate1</a></li>
-					<li><a href="" data-category="">cate2</a></li>
-					<li><a href="" data-category="">cate3</a></li>
+					<li><a href="" data-category="">· cate1</a></li>
+					<li><a href="" data-category="">· cate2</a></li>
+					<li><a href="" data-category="">· cate3</a></li>
 				</ul></li>
 			
 			
@@ -52,12 +52,25 @@
 </nav>
 
 <style>
+    .smenu{
+        font-size: 15px;
+        
+    }
+    .sidebar-top{
+        font-size: 18px;
+        font-weight: 600;
+    }
+    a:hover{
+        text-decoration: none;
+        color: #ED1C24;
+    }
     #sidebarMenu {
         position: fixed;
         left: 0px;
         top: 150px;
         width: 300px;
         z-index: 950;
+        font-family: 'MapoPeacefull';
     }
 
     .slide-in {
@@ -95,10 +108,10 @@
         list-style: none;
     }
     a {
-        color: #787878;
+        color: #757575;
     }
     hr{
-        border-top: 1px solid #787878;
+        border-top: 1px solid #757575;
     }
 </style>
 
@@ -122,7 +135,7 @@
             success : (res) => {
                 res.forEach((subscribes) => {
                     console.log(subscribes)
-                    $('#sidebar-sublist').append('<li><a href="" data-category="">' + subscribes[0] + '</a></li>')
+                    $('#sidebar-sublist').append('<li><a href="" data-category="">· ' + subscribes[0] + '</a></li>')
                 })
             },
             error : (err) => {

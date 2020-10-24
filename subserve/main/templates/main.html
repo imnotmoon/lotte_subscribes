@@ -32,9 +32,8 @@
     <!-- hidden 처리하고 자바스크립트로 메뉴 누르면 나오게 할거임. addclass해서 클래스에 hidden 넣었다뺐다 할거. -->
         {% include 'sidebar.html' %}
         <!-- 좌측 사이드바 종료 -->
-
-        <!-- 중앙 카드 그리드 -->
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 maincenter">
+        <div class="maingridmain">
+          <main role="main" class="col-md-9 col-lg-10 px-md-4 maincenter">
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                   <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -89,21 +88,22 @@
                     {% for store in stores.all %}
                     <!-- 여기 for loop 들어가서 카드 만들거임 -->
                     <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <rect width="100%" height="100%" fill="#55595c">
-                              <img src="{{ store.photo.url }}" alt="" width="100%" height="230px">
+                        <div class="card">
+                            <rect width="100%" height="100%" style="text-align: center;">
+                              <img src="{{ store.photo.url }}" alt="" width="250px" height="250px" style="text-align: center;">
                             </rect>
                             <!-- </svg> -->
-                            <div class="card-body" style="color: black;">
+                            <div class="card-body">
                               <p class="card-text">
-                              <h5>{{store.storename}}</h5>
-                              {{store.description}}</p>
+                              <h5 class="grid-storename">{{store.storename}}</h5>
+                              <a class="grid-storedetail" style="text-decoration : none">  ｜ {{store.description}}</a></p>
                               <div class="d-flex justify-content-between align-items-center textbottom">
                                   <div class="btn-group">
-                                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toDetailPage('{{forloop.counter}}')">보기</button>
+                                  <button type="button" class="btn-sm btn-view" onclick="toDetailPage('{{forloop.counter}}')">VIEW｜</button>
                                   </div>
-                                  <small class="text-muted" style="text-align:right">여기에 인기순위 넣자</small>
+                                  
                               </div>
+                              <small class="grid-storerank">{{store.rank}}위</small>
                             </div>
                         </div>
                     </div>
@@ -111,6 +111,9 @@
                 </div>
             </div>
         </main>
+        </div>
+        <!-- 중앙 카드 그리드 -->
+        
     <!-- 중앙 카드 그리드 종료 -->
     </div>
 
@@ -141,13 +144,13 @@
           success : (res) => {
             res.forEach((store) => {
               let data = store['fields'];
-              var addContent = '<div class="col-md-4"> <div class="card mb-4 shadow-sm">';
-              addContent += '<rect width="100%" height="100%" fill="#55595c"> <img src="' + ('/media/' + data.photo) + '" ';
-              addContent += 'alt="" width="100%" height="230px"></rect><div class="card-body" style="color: black;">';
-              addContent += '<p class="card-text"> <h5>' + data.storename + '</h5> ' + data.description + '</p>';
+              var addContent = '<div class="col-md-4"> <div class="card">';
+              addContent += '<rect width="100%" height="100%" style="text-align: center;"> <img src="' + ('/media/' + data.photo) + '" ';
+              addContent += 'alt="" width="250px" height="250px" style="text-align: center;"></rect><div class="card-body">';
+              addContent += '<p class="card-text"> <h5 class="grid-storename">' + data.storename  + '</h5>' +'<a class="grid-storedetail" style="text-decoration : none">' + '  ｜ ' + data.description+'</a>' + '</p>';
               addContent += '<div class="d-flex justify-content-between align-items-center textbottom"> <div class="btn-group">';
-              addContent += '<button type="button" class="btn btn-sm btn-outline-secondary" onclick="toDetailPage('+ (count%numCards+1) +')">보기</button>';
-              addContent += '</div> <small class="text-muted" style="text-align:right">여기에 인기순위 넣자</small> </div> </div> </div> </div>';
+              addContent += '<button type="button" class="btn-sm btn-view" onclick="toDetailPage('+ (count%numCards+1) +')">VIEW</button>';
+              addContent += '</div> </div> <small class="grid-storerank">'+store.rank+'위</small></div> </div> </div>';
               $('#store-cards').append(addContent);
               count += 1;
             })
@@ -171,6 +174,49 @@
 </html>
 
 <style>
+  .btn-view {
+        border: 1.5px solid  white;
+        color: #ED1C24;
+        border-radius: 5px;
+        background-color: white;
+        font-size: medium;
+        text-decoration: none;
+        align-items: center;
+        font-family: 'MapoPeacefull';
+        position:relative;
+        cursor:pointer;
+        transition:800ms ease all;
+        outline:none;
+    }
+    .btn-view:hover{
+        background :  #ED1C24;
+        border: none;
+        color : #ffffff;
+    }
+  .grid-storedetail{
+    font-family: 'MapoPeacefull';
+    font-size: 15px;
+    color: #757575;
+  }
+
+  .grid-storename{
+    font-family: 'MapoPeacefull';
+    font-size: 27px;
+    font-weight: 900;
+    color: #757575;
+  }
+  .col-md-4{
+    padding: 0px 20px;
+  }
+  
+  .card{
+    margin-bottom: 50px;
+    border: none;
+  }
+  .maincenter{
+    display: block;
+    margin: 0px auto;
+  }
   .topbutton{
     position : fixed;
     bottom: 25px;
@@ -184,9 +230,12 @@
   
   .card-body{
     height: 230px;
-    border-bottom-left-radius: 2em;
+    border-top-left-radius: 2em;
     border-bottom-right-radius: 2em;
     position: relative;
+    border:1px solid  #ED1C24;
+    margin-top: 10px;
+    box-shadow: 0 0 0.1rem #ED1C24;
   }
 
   .textbottom{
@@ -194,14 +243,19 @@
     bottom: 30px;
   }
 
-  .ml-sm-auto{
-
-    margin-left: 0px;
-  }
-
   .text-muted{
     text-align: right;
     right: 0px;
     position: relative;
+  }
+
+  .grid-storerank{
+    color:  #ED1C24;
+    font-family: 'MapoPeacefull';
+    font-size: 25px;
+    font-weight: 900;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
   }
 </style>
