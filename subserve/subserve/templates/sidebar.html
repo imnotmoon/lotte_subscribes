@@ -1,0 +1,135 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse slide-in" style="color: black;">
+    <div class="menuShop">
+		<ul class="mmenu">
+            <li>
+                <a href="{% url 'weekrank' %}" data-category="">이주의 섭섭</a>
+            </li>
+            <hr>
+            {% if user.is_authenticated %}
+			<li>
+				<a data-menu="submenu" href="#">sub list</a>
+				<ul class="smenu" id="sidebar-sublist">
+                    <li><a href="" data-category="">모든 구독목록</a></li>
+                </ul>
+            </li>
+            <hr>
+			<li>
+				<a data-menu="submenu" href="#">wish list</a>
+				<ul class="smenu"><li><a href="" data-category="">wish all</a></li>
+					<li><a href="" data-category="">wish1</a></li>
+					<li><a href="" data-category="">wish2</a></li>
+					<li><a href="" data-category="">wish3</a></li>
+					<!--li><a href="/product/list.html?cate_no=50" data-category="50">pero 3 way</a></li-->
+					
+                </ul>
+            </li>
+            <hr>
+            {% else %}
+            <li>
+				<a data-menu="submenu" href="#">인기 지역</a>
+				<ul class="smenu" id="sidebar-sublist">
+                    <li><a href="" data-category="">잠실</a></li>
+					<li><a href="" data-category="">화전</a></li>
+					<li><a href="" data-category="">행신</a></li>
+					<li><a href="" data-category="">연신내</a></li>
+                </ul>
+            </li>
+            <hr>
+
+            {% endif %}
+			<li>
+				<a data-menu="submenu" href="#">category</a>
+				<ul class="smenu"><li><a href="" data-category="">cate all</a></li>
+					<!--li><a href="/product/list.html?cate_no=53" data-category="53">neater</a></li-->
+					<li><a href="" data-category="">cate1</a></li>
+					<li><a href="" data-category="">cate2</a></li>
+					<li><a href="" data-category="">cate3</a></li>
+				</ul></li>
+			
+			
+        </ul>
+    </div>
+</nav>
+
+<style>
+    #sidebarMenu {
+        position: fixed;
+        left: 0px;
+        top: 150px;
+        width: 300px;
+        z-index: 950;
+    }
+
+    .slide-in {
+        animation: slide-in 0.5s forwards;
+        -webkit-animation: slide-in 0.5s forwards;
+    }
+
+    .slide-out {
+        animation: slide-out 0.5s forwards;
+        -webkit-animation: slide-out 0.5s forwards;
+    }
+        
+    @keyframes slide-in {
+        100% { transform: translateX(0%); }
+    }
+
+    @-webkit-keyframes slide-in {
+        100% { -webkit-transform: translateX(0%); }
+    }
+        
+    @keyframes slide-out {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-100%); }
+    }
+
+    @-webkit-keyframes slide-out {
+        0% { -webkit-transform: translateX(0%); }
+        100% { -webkit-transform: translateX(-100%); }
+    }
+
+    ul {
+        list-style: none;
+    }
+    li {
+        list-style: none;
+    }
+    a {
+        color: #787878;
+    }
+    hr{
+        border-top: 1px solid #787878;
+    }
+</style>
+
+<script>
+    let sidebarBtn = document.getElementById('sidebar-hide-button');
+    let sideBar = document.getElementById('sidebarMenu');
+    
+    function sidebar() {
+        // sideBar.classList.toggle('hidden');
+        var isOpen = sideBar.classList.contains('slide-in');
+        sideBar.setAttribute('class', isOpen ? 'slide-out' : 'slide-in');
+    }
+
+    window.onload = function() {
+        let url = "{% url 'sidebardata' %}";
+        const csrftoken = Cookies.get('csrftoken');
+        $.ajax({
+            url: url,
+            headers : {'X-CSRFToken' : csrftoken},
+            type: 'post',
+            success : (res) => {
+                res.forEach((subscribes) => {
+                    console.log(subscribes)
+                    $('#sidebar-sublist').append('<li><a href="" data-category="">' + subscribes[0] + '</a></li>')
+                })
+            },
+            error : (err) => {
+                console.log(err);
+                return;
+          }
+        })
+    }
+
+</script>

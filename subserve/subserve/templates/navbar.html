@@ -1,0 +1,153 @@
+<style type = "text/css">
+  nav{
+    padding : 0px 0px;
+    background-color:white;
+    width: 100%;
+    z-index: 900;
+    position: absolute;
+  }
+  .navbar-nav{
+    width : 100%;
+  }
+
+  .navbar{
+    padding : 8px;
+    height : 150px;
+  }
+
+  #navbarNav{
+    background-color:white;
+    width: 100%;
+  }
+
+  svg{
+    text-align: center;
+  }
+  .navbar-brand{
+    
+    margin : 0 auto;
+    text-align: center;
+  }
+
+  .nav-link{
+    text-align: center;
+    padding : 33px;
+  }
+
+  .nav-link svg:hover{
+    fill : #ED1C24;
+  }
+  
+  .sticky {
+      position: fixed;
+      top: 0;
+      width: 100%
+  }
+
+
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light" id="topNavBar">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" id="sidebar-hide-button" onclick="sidebar()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#757575" width="55px" height="55px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z"/></svg>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-map" href="{% url 'mylocation' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#757575" width="55px" height="55px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.65 4.98l-5-1.75c-.42-.15-.88-.15-1.3-.01L4.36 4.56C3.55 4.84 3 5.6 3 6.46v11.85c0 1.41 1.41 2.37 2.72 1.86l2.93-1.14c.22-.09.47-.09.69-.01l5 1.75c.42.15.88.15 1.3.01l3.99-1.34c.81-.27 1.36-1.04 1.36-1.9V5.69c0-1.41-1.41-2.37-2.72-1.86l-2.93 1.14c-.22.08-.46.09-.69.01zM15 18.89l-6-2.11V5.11l6 2.11v11.67z"/></svg>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-search" href="{% url 'search' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#757575" width="55px" height="55px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27c1.2-1.4 1.82-3.31 1.48-5.34-.47-2.78-2.79-5-5.59-5.34-4.23-.52-7.79 3.04-7.27 7.27.34 2.8 2.56 5.12 5.34 5.59 2.03.34 3.94-.28 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          </a>
+        </li>
+
+        <!-- 이거 중간으로 가서 로고로 바꿔야함 -->
+        <a class="navbar-brand" href="{% url 'main'%}">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="551.395" height="112.5" viewBox="0 0 551.395 112.5">
+            <defs>
+              <filter id="ub" x="101.38" y="21.5" width="119" height="91" filterUnits="userSpaceOnUse">
+                <feOffset dx="2" dy="2" input="SourceAlpha"/>
+                <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                <feFlood flood-color="#060606" flood-opacity="0.149"/>
+                <feComposite operator="in" in2="blur"/>
+                <feComposite in="SourceGraphic"/>
+              </filter>
+              <filter id="패스_83" x="0" y="0" width="551.395" height="100.558" filterUnits="userSpaceOnUse">
+                <feOffset dx="3" dy="3" input="SourceAlpha"/>
+                <feGaussianBlur stdDeviation="2.5" result="blur-2"/>
+                <feFlood flood-opacity="0.157"/>
+                <feComposite operator="in" in2="blur-2"/>
+                <feComposite in="SourceGraphic"/>
+              </filter>
+              <filter id="serve" x="247.894" y="21.5" width="290" height="91" filterUnits="userSpaceOnUse">
+                <feOffset dx="2" dy="2" input="SourceAlpha"/>
+                <feGaussianBlur stdDeviation="1.5" result="blur-3"/>
+                <feFlood flood-color="#060606" flood-opacity="0.149"/>
+                <feComposite operator="in" in2="blur-3"/>
+                <feComposite in="SourceGraphic"/>
+              </filter>
+            </defs>
+            <g id="그룹_63" data-name="그룹 63" transform="translate(-1083.606 -557.599)">
+              <g transform="matrix(1, 0, 0, 1, 1083.61, 557.6)" filter="url(#ub)">
+                <text id="ub-2" data-name="ub" transform="translate(108.88 82)" fill="#ED1C24" stroke="#ED1C24" stroke-width="5" font-size="55" font-family="MapoDPP" letter-spacing="0.5em"><tspan x="0" y="0">ub</tspan></text>
+              </g>
+              <g transform="matrix(1, 0, 0, 1, 1083.61, 557.6)" filter="url(#패스_83)">
+                <path id="패스_83-2" data-name="패스 83" d="M9262.479-995.781h68.268l-68.268-72.558,523.394.053" transform="translate(-9251.48 1079.34)" fill="none" stroke="#ED1C24" stroke-linecap="round" stroke-linejoin="round" stroke-width="13"/>
+              </g>
+              <g transform="matrix(1, 0, 0, 1, 1083.61, 557.6)" filter="url(#serve)">
+                <text id="serve-2" data-name="serve" transform="translate(255.39 82)" fill="#ED1C24" stroke="#ED1C24" stroke-width="5" font-size="55" font-family="MapoDPP" letter-spacing="0.5em"><tspan x="0" y="0">serve</tspan></text>
+              </g>
+            </g>
+          </svg>
+          
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <li class="">
+          <a class="" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="55px" height="55px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.65 4.98l-5-1.75c-.42-.15-.88-.15-1.3-.01L4.36 4.56C3.55 4.84 3 5.6 3 6.46v11.85c0 1.41 1.41 2.37 2.72 1.86l2.93-1.14c.22-.09.47-.09.69-.01l5 1.75c.42.15.88.15 1.3.01l3.99-1.34c.81-.27 1.36-1.04 1.36-1.9V5.69c0-1.41-1.41-2.37-2.72-1.86l-2.93 1.14c-.22.08-.46.09-.69.01zM15 18.89l-6-2.11V5.11l6 2.11v11.67z"/></svg>
+          </a>
+        </li>
+        <li class="">
+          <a class="" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="55px" height="55px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.65 4.98l-5-1.75c-.42-.15-.88-.15-1.3-.01L4.36 4.56C3.55 4.84 3 5.6 3 6.46v11.85c0 1.41 1.41 2.37 2.72 1.86l2.93-1.14c.22-.09.47-.09.69-.01l5 1.75c.42.15.88.15 1.3.01l3.99-1.34c.81-.27 1.36-1.04 1.36-1.9V5.69c0-1.41-1.41-2.37-2.72-1.86l-2.93 1.14c-.22.08-.46.09-.69.01zM15 18.89l-6-2.11V5.11l6 2.11v11.67z"/></svg>
+          </a>
+        </li>
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <a class="nav-link nav-mypage" href="{% url 'mypage' %}">
+          {% else %}
+            <a class="nav-link nav-mypage" href="{% url 'mypage' %}">
+          {% endif %}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#757575" width="55px" height="55px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"/></svg>
+            </a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<script>
+  // When the user scrolls the page, execute myFunction
+  window.onscroll = function() {myFunction()};
+
+  // Get the header
+  var header = document.getElementById("topNavBar");
+
+  // Get the offset position of the navbar
+  var sticky = header.offsetTop;
+
+  // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+  function myFunction() {
+      if (window.pageYOffset > sticky) {
+          header.classList.add("sticky");
+      } else {
+          header.classList.remove("sticky");
+      }
+  }
+</script>

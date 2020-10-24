@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <title>::::SUBSERVE::::</title>
+</head>
+<body>
+    <!-- navbar -->
+    {% include 'navbar.html' %}
+    <!-- navbar 종료 -->
+    <div class="row" id="main">
+    <!-- sidebar -->
+    {% include 'sidebar.html' %}
+    <!-- sidebar 종료 -->
+
+    <!-- 로그인 화면 -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="">
+            <h2 class="">LOGIN</h2>
+
+            {% if error %}
+            <h3>{{error}}</h3>
+            <br>
+            <br>
+            {% endif %}
+
+            <form method="POST" action="{% url 'signin' %}">
+                {% csrf_token %}
+                <div class="">
+                    <div class="">
+                        <input class="" name="username" type="text" placeholder="아이디">
+                        <br>
+                        <input class="" name="password" type="password" placeholder="  비밀번호">
+                    </div> 
+                    <div class="">
+                        <input class="" type="submit" value="로그인">
+                        <button class="" type="button"> <a href="{% url 'signup' %}"> 회원가입</a></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    </div>
+
+
+    <!-- 로그인 화면 종료 -->
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+    <!-- footer 종료 -->
+    
+</body>
+</html>

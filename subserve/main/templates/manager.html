@@ -1,0 +1,175 @@
+<!-- site for store administrators -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>::::SUBSERVE::::</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
+    <!--<style>
+        @font-face {
+          font-family: 'MapoPeacefull';
+          src: url("{% static 'font/MapoPeacefull.ttf' %}");
+        }
+        * {
+          font-family: 'MapoPeacefull';
+        }
+    </style> -->
+</head>
+<body>
+    <!-- 상단 내비게이션 바 -->
+    {% include 'navbar.html' %}
+    <!-- 상단 내비게이션 바 종료 -->
+
+    <div class="row" id="main" style="color: #757575;">
+      <div>
+        <img src="{{store.photo.url}}" alt="">
+        <div>
+          <h5>{{store.storename}}</h5>
+          <p>{{store.description}}</p>
+        </div>
+      </div>
+
+      <div>
+        <h5>메뉴</h5>
+        {% for m in menu %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <rect width="100%" height="100%" fill="#55595c">
+                  <img src="{{ m.photo.url }}" alt="" width="100%" height="230px">
+                </rect>
+                <!-- </svg> -->
+                <div class="card-body" style="color: black;">
+                  <p class="card-text">
+                  <h5>{{m.menu_name}}</h5>
+                  {{m.price}}</p>
+                  <!-- 구독자수 쓸라했는데 안나옴 -->
+                  <p>{{ countSub.forloop.counter }}명이 구독중입니다.</p>
+                  <div class="d-flex justify-content-between align-items-center textbottom">
+                      <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toDetailPage('{{forloop.counter}}')">보기</button>
+                      </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div>
+        <h5>잔여횟수 차감</h5>
+        <div>
+          <!-- ajax 통신을 위한 form -->
+          <form action="{% url 'checkAvailableAPI' %}" id="ajax-form", method="POST">
+            <select name="menu" id="menu">
+              {% for m in menu %}
+                <option value="{{ m.id }}">{{ m.menu_name }}</option>
+              {% endfor %}
+            </select>
+            <input type="text" value="유저 아이디를 입력하세요." name="userid">
+            <input type="text" value="차감 횟수를 입력하세요." name="count">
+            <input type="text" value="{{user.manager.store_id}}" name="store", style="display: none;">
+            <button type="submit"> Done </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 하단 footer -->
+    {% include 'footer.html' %}
+    <!-- 하단 footer 종료 -->
+    
+    <script>
+      // 현재 존재하는 아이템(카드) 갯수
+      let numCards = document.querySelectorAll('.card-body').length;
+
+      function toDetailPage(idx) {
+        let url = "{% url 'detail' 1 %}";
+        window.location.href = url.replace("1", idx-1);
+      }
+
+      let count = 0;
+
+      
+      function checkAvailableAPI() {
+        let url = "{% url 'loadmoredata' %}";
+        const csrftoken = Cookies.get('csrftoken');
+        $.ajax({
+          url: url,
+          headers : {'X-CSRFToken' : csrftoken},
+          data : {'count' : count},
+          type: 'post',
+          success : (res) => {
+            res.forEach((store) => {
+              let data = store['fields'];
+              var addContent = '<div class="col-md-4"> <div class="card mb-4 shadow-sm">';
+              addContent += '<rect width="100%" height="100%" fill="#55595c"> <img src="' + ('/media/' + data.photo) + '" ';
+              addContent += 'alt="" width="100%" height="230px"></rect><div class="card-body" style="color: black;">';
+              addContent += '<p class="card-text"> <h5>' + data.storename + '</h5> ' + data.description + '</p>';
+              addContent += '<div class="d-flex justify-content-between align-items-center textbottom"> <div class="btn-group">';
+              addContent += '<button type="button" class="btn btn-sm btn-outline-secondary" onclick="toDetailPage('+ (count%numCards+1) +')">보기</button>';
+              addContent += '</div> <small class="text-muted" style="text-align:right">여기에 인기순위 넣자</small> </div> </div> </div> </div>';
+              $('#store-cards').append(addContent);
+              count += 1;
+            })
+          },
+          error : (err) => {
+              console.log(err);
+              return;
+          }
+        })
+      }
+
+
+    </script>
+    <div class="topbutton">
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#A6C2CD" width="100px" height="100px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.29 8.71L6.7 13.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L12.7 8.71c-.38-.39-1.02-.39-1.41 0z"/></svg>
+      </a>
+    </div>
+</body>
+</html>
+
+<style>
+  .topbutton{
+    position : fixed;
+    bottom: 25px;
+    right: 25px;
+  }
+
+  #myCarousel {
+      height: 270px;
+      color: black;
+  }
+  
+  .card-body{
+    height: 230px;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+    position: relative;
+  }
+
+  .textbottom{
+    position: absolute;
+    bottom: 30px;
+  }
+
+  .ml-sm-auto{
+
+    margin-left: 0px;
+  }
+
+  .text-muted{
+    text-align: right;
+    right: 0px;
+    position: relative;
+  }
+</style>

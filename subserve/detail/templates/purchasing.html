@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <title>::::SUBSERVE::::</title>
+</head>
+<body>
+    <!-- navbar -->
+    {% include 'navbar.html' %}
+    <!-- navbar 종료 -->
+
+    <div class="row" id="main">
+        <!-- 좌측 사이드바 -->
+        {% include 'sidebar.html' %}
+        <!-- 좌측 사이드바 종료 -->
+
+        <!-- 중앙 결제 화면 -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div>
+                <h2>결제 페이지</h2>
+                <h5>{{menu}}</h5>
+                <br>
+                <div class="grid-3-top">
+                    <div>
+                        <h5>구독 정보</h5>
+                    </div>
+                    <div>
+                        <h5>할인/혜택</h5>
+                    </div>
+                    <div>
+                        <h5>결제금액</h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="grid-3-top">
+                    <div class="grid-2">
+                        <img src="{{menu.photo.url}}" alt="menu_photo1" class="menu-photo">
+                        <div>
+                            <p>{{menu.description}}</p>
+                            <p>{{menu.count}} 회 / {{menu.cycle}} 주</p>
+                        </div>
+                    </div>
+                    <div> - </div>
+                    <div>{{menu.price}}원</div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <hr>
+            <div>
+                <h5>본인인증</h5>
+                <br>
+                <div>이메일 인증</div>
+            </div>
+
+            <br>
+            <br>
+            <hr>
+            <div>
+                <h5>배송지 정보</h5>
+                <br>
+                <form action="" style="margin-left: 20px;">
+                <table>
+                    <tr>
+                        <td class="cell-title">이름</td>
+                        <td><input type="text" class="input-text-box" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td class="cell-title">휴대폰 번호</td>
+                        <td><input type="text" class="input-text-box" id="phone"></td>
+                    </tr>
+                    <tr>
+                        <td class="cell-title">이메일 주소</td>
+                        <td><input type="text" class="input-text-box" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td class="cell-title">주소</td>
+                        <td><input type="text" class="input-text-box" id="address"></td>
+                    </tr>
+                </table>
+                </form>
+
+                <input type="checkbox" name="same-with-userinfo" id="user-same" onclick="fillInfo()" value="false">
+                <label for="user-same">회원정보와 동일</label>
+            </div>
+
+            <br>
+            <br>
+            <hr>
+            
+            <div>
+                <h5>결제수단</h5>
+                <br>
+                <div class="purchase-type-box">
+                    <div class="grid-3">
+                        <button class="purchase-type-btn">신용/체크카드</button>
+                        <button class="purchase-type-btn">무통장 입금</button>
+                        <button class="purchase-type-btn">휴대폰 소액결제</button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div id="summary">
+
+            </div>
+
+            <br>
+            <br>
+
+            <div>
+                <h5>약관동의</h5>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+            <div>
+                <button id="done"><a href="{% url 'subscribe' store_id=menu.store_id.id menu_id=menu.menu_id %}">결제하기</a></button>
+            
+            </div>
+
+
+
+        <!-- 결제 화면 종료 -->
+        </main>
+    </div>
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+    <!-- footer 종료 -->
+    
+</body>
+
+<script>
+    let checkSameInfo = document.getElementById('user-same');
+    function fillInfo() {
+        if(checkSameInfo.value == 'false') {
+            document.getElementById('name').value = "{{user.customer.name}}";
+            document.getElementById('phone').value = "{{user.customer.phone}}";
+            document.getElementById('email').value = "fake@email.com";
+            document.getElementById('address').value = "{{user.customer.address}}";
+            checkSameInfo.value = 'true';
+        } else {
+            document.getElementById('name').value = "";
+            document.getElementById('phone').value = "";
+            document.getElementById('email').value = "";
+            document.getElementById('address').value = "";
+            checkSameInfo.value = 'false';
+        }
+    }
+
+</script>
+
+<style>
+    #main {
+        color: #a6c2cd;
+        margin: 3% 10% 5% 10%;
+    }
+
+    .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        padding-left: 30px;
+    }
+
+    .grid-3-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        text-align: center;
+    }
+
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+    
+    .purchase-type-box {
+        width: 30%;
+    }
+
+    #summary {
+        background-color: #a6c2cd;
+        width: 100%;
+        height: 200px;
+    }
+
+    .input-text-box {
+        border: 1px solid #a6c2cd;
+        border-radius: 20px;
+    }
+
+    #done {
+        background-color: #FF6754;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        width: 150px;
+        height: 50px;
+        margin-left: 40%;
+    }
+
+    .menu-photo {
+        width: 150px;
+        height: 100px;
+    }
+
+    .purchase-type-btn {
+        border: 1px solid #a6c2cd;
+        border-radius: 5px;
+        background-color: white;
+        color: #a6c2cd;
+        width: 120px;
+        height: 40px;
+        margin-left: 20px;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    td input {
+        width: 50%;
+    }
+
+    .cell-title {
+        width: 20%;
+    }
+
+    tr {
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #a6c2cd;
+    }
+</style>
+
+</html>

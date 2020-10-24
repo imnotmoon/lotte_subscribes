@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <title>::::SUBSERVE::::</title>
+</head>
+<body>
+    <!-- navbar -->
+    {% include 'navbar.html' %}
+    <!-- navbar 종료 -->
+
+    <!-- 디테일 화면 -->
+    <div class="row" id="main">
+        {% include 'sidebar.html' %}
+        <main>
+            <div class="top-container grid-3">
+                <!-- 매장 대표 사진 -->
+                <div>
+                    <img src="{{store.photo.url}}" alt="store_representing_pic" width="50%" height="50%" id="thumbnail">
+                    <h2>{{ store.storename }}</h2>
+                </div>
+                <!-- 구독 서비스 관련 내용(요약) -->
+                <div>
+                    <ul>
+                        <li style="width: 100%;" class="service-info"><p>구독 서비스 관련 내용(요약)</p></li>
+                        <li style="width: 100%;" class="service-info"><p>구독 서비스 관련 내용(요약)</p></li>
+                        <li style="width: 100%;" class="service-info"><p>구독 서비스 관련 내용(요약)</p></li>
+                        <li style="width: 100%;" class="service-info"><p>구독 서비스 관련 내용(요약)</p></li>
+                        <li style="width: 100%;" class="service-info"><p>구독 서비스 관련 내용(요약)</p></li>
+                    </ul>
+                </div>
+                <!-- 구독 버튼 -->
+                <div>
+                    <button class="sub-btn">구독</button>
+                    <a href="/menu/create">메뉴추가</a>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="introduction-container">
+                <div class="inner-container">
+                    <h2>매장 소개</h2>
+                    <div>
+                        <ul>
+                            <li class="desc-inner">
+                                <p class="desc-inner-text">매장 관련 내용</p>
+                            </li>
+                            <li class="desc-inner">
+                                <p class="desc-inner-text">휴무일</p>
+                            </li>
+                            <li class="desc-inner">
+                                <p class="desc-inner-text">사장님 말씀 등</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <!-- 메뉴들의 상세정보를 담는 컨테이너 -->
+            <div class="introduction-container">
+                <div class="menu-container inner-container">
+                    <h2>구독 가능한 메뉴</h2>
+                    {% for menu in store.menu_set.all %}
+                    <div class="menu-card grid-3">
+                        <div>
+                            <img src="{{menu.photo.url}}" alt="menu_photo1" class="menu-photo">
+                            <h3>{{ menu.menu_name }}</h3>
+                        </div>
+                        <div>
+                            <p>메뉴 설명 <br> {{menu.description}}</p>
+                            <p>구독 정보 <br> {{menu.count}} 회 / {{menu.cycle}} 주</p>
+                            <p>가격 <br> {{menu.price}}원</p>
+                        </div>
+                        <div>
+                            <button id="btn-subscribe"><a href="{% url 'purchasing' store_id=store.id menu_id=menu.menu_id %}">구독하기</a></button>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <!-- 매장 위치 -->
+            <div>
+                <h2>매장 위치</h2>
+                <p>{{store.address}}</p>
+                <div id="map" style="width:100%;height:350px;"></div>
+            </div>
+
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey={{ key }}&libraries=services"></script>
+            <script>
+                var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                    mapOption = {
+                        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                        level: 2 // 지도의 확대 레벨
+                    };  
+                
+                // 지도를 생성합니다    
+                var map = new kakao.maps.Map(mapContainer, mapOption); 
+                
+                // 주소-좌표 변환 객체를 생성합니다
+                var geocoder = new kakao.maps.services.Geocoder();
+                
+                // 주소로 좌표를 검색합니다
+                geocoder.addressSearch('{{store.address}}', function(result, status) {
+                
+                    // 정상적으로 검색이 완료됐으면 
+                     if (status === kakao.maps.services.Status.OK) {
+                
+                        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                        console.log(coords);
+                
+                        // 결과값으로 받은 위치를 마커로 표시합니다
+                        var marker = new kakao.maps.Marker({
+                            map: map,
+                            position: coords
+                        });
+                
+                        // 인포윈도우로 장소에 대한 설명을 표시합니다
+                        var infowindow = new kakao.maps.InfoWindow({
+                            content: '<div style="width:150px;text-align:center;padding:6px 0;">{{store.storename}}</div>'
+                        });
+                        infowindow.open(map, marker);
+                
+                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                        map.setCenter(coords);
+                    } 
+                });    
+                </script>
+        </div>
+    </main>
+    <!-- 디테일 화면 종료 -->
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+    <!-- footer 종료 -->
+    
+</body>
+<style>
+    #thumbnail {
+        width: 290px;
+        height: 230px;
+    }
+    
+    .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .introduction-container {
+        border: 3px solid #A6C2CD;
+        border-radius: 20px;
+        background-color: white;
+    }
+
+    .inner-container {
+        margin: 30px;
+    }
+
+    main {
+        margin: 10% 20% 10% 20%;
+        color: #A6C2CD;
+        width: 70%;
+    }
+
+    .desc-inner {
+        width: 100%;
+    }
+
+    body {
+        background-color: white;
+    }
+
+    .menu-photo {
+        width: 230px;
+        height: 200px;
+    }
+
+    .service-info {
+        height: 50%;
+    }
+    
+    .sub-btn{
+      color: #FF6754;
+      border: #FF6754 solid 2px;
+      border-radius: 5px;
+      background-color: white;
+      margin-left: 30%;
+      width: 100px;
+      height: 50px;
+    }
+
+    .sub-btn:hover {
+      color: white;
+      background-color: #FF6754;
+      border:  #FF6754;
+    }
+
+    #btn-subscribe{
+        color: #FF6754;
+      border: #FF6754 solid 2px;
+      border-radius: 5px;
+      background-color: white;
+      margin-left: 30%;
+      width: 100px;
+      height: 50px;
+    }
+
+    #btn-subscribe:hover {
+      color: white;
+      background-color: #FF6754;
+      border:  #FF6754;
+    }
+</style>
+
+</html>

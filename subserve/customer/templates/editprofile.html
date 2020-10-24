@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <title>::::SUBSERVE::::</title>
+</head>
+<body>
+    <!-- navbar -->
+    {% include 'navbar.html' %}
+    <!-- navbar 종료 -->
+
+    <div class="row" id="main">
+    <!-- sidebar -->
+    {% include 'sidebar.html' %}
+    <!-- sidebar 종료 -->
+
+    <!-- 회원정보 수정 화면 -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <form action="{% url 'editProfileAPI' %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <h2>{{user.customer.name}}님의 회원 정보 </h2>
+            <br>
+            <hr>
+            <img src="{{user.customer.profile.url}}" alt="" style="width: 50%; height: 50%;">
+            <hr>
+            <div class="user-info">
+                <h4>아이디 </h4>
+                <h4>{{user.username}}</h4>
+            </div>
+            <hr>
+            <div class="user-info">
+                <h4>성별
+                {% if user.customer.sex %}
+                <h4>남</h4>
+                {% else %}
+                <h4>여</h4>
+                {% endif %}
+            </div>
+            <hr>
+            <div class="user-info">
+                <h4>휴대폰 번호</h4>
+                <input type="text" value="{{user.customer.phone}}" name="phone">
+            </div>
+            <hr>
+            <div class="user-info">
+                <h4>이메일 주소 </h4>
+                <h4>이거 왜있지 안받았는데</h4>
+            </div>
+            <hr>
+            <div class="user-info">
+                <h4>주소</h4>
+                <input type="text" value="{{user.customer.address}}" name="address">
+                <h4>{{user.customer.address}}</h4>
+            </div>
+            <hr>
+            <div class="user-info">
+                <h4>생년월일</h4>
+                <h4>{{user.customer.birthday|date:'Y년 m월 d일'}}</h4>
+            </div>
+            <hr>
+        </div>
+        <div>
+            <button class="" type="submit">회원정보 수정</button>
+        </div>
+    </main>
+    </div>
+    
+
+    <!-- 회원정보 수정 화면 종료 -->
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+    <!-- footer 종료 -->
+    
+</body>
+
+<style>
+    #main {
+        margin: 3% 10% 5% 10%;
+    }
+</style>
+
+</html>

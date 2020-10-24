@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+    <title>::::SUBSERVE::::</title>
+</head>
+<body>
+    <!-- navbar -->
+    {% include 'navbar.html' %}
+    <!-- navbar 종료 -->
+    <div class="row" id="main">
+    <!-- sidebar -->
+    {% include 'sidebar.html' %}
+    <!-- sidebar 종료 -->
+
+    <!-- 회원가입 화면 -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="">
+            <br>   
+            <p class="signupup">SIGN UP</p>
+    
+            {% if error %}
+            <h5>{{error}}</h5>
+            <br>
+            <br>
+            {% endif %}
+            <div class="">
+                <div>
+                    <table>
+                        <tr class="cell-title">
+                            <td class="signup-title">이름</td>
+                            <td><input type="text" name="name" id="name" class="signupinput"></td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">아이디</td>
+                            <td><input type="text" name="username" id="id" class="signupinput"></td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">비밀번호</td>
+                            <td><input name="password" type="password" id="pwd" class="signupinput"></td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">비밀번호 확인</td>
+                            <td><input name="passwordCheck" type="password" id="pwdconfirm" class="signupinput"></td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">성별</td>
+                            <td class="signup-option">
+                                <input class="" type="radio" name="sex" value="male">남
+                                <input class="" type="radio" name="sex" value="female">여
+                            </td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">이메일</td>
+                            <td><input name="email" type="text" id="email" class="signupinput"></td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">주소</td>
+                            <td><input name="address" type="text" id="address" class="signupinput"></td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">생년월일</td>
+                            <td><input name="birthday" type="text" placeholder="YYYY-MM-DD" id="birthday" class="signupinput"></td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">휴대폰번호</td>
+                            <td>
+                                <input name="phone" type="text" id="phone" class="signupinput">
+                            </td>
+                        </tr>
+                        <tr class="cell-title">
+                            <td class="signup-title">마케팅 정보 수신동의</td>
+                            <td class="signup-option">
+                                <input class="signup-box2" type="radio" name="marketing-email" value="true">이메일
+                                <input class="signup-box2" type="radio" name="marketing-sms" value="true"> SMS
+                            </td>
+                        </tr>
+                    </table>
+                    <div>
+                        <p class="signup-title">개인정보 수집에 대한 동의</p>
+                        <div class="signup-promise">
+                            <p class="p2">섭섭이 취급하는 모든 개인정보는 관련 법령에 근거하거나 정보주체의 동의에 의하여 수집ㆍ보유 및 처리되고 있습니다.
+                                <br>
+                                섭섭은 법령의 규정에 따라 수집ㆍ보유 및 처리하는 개인정보를 업무의 적절한 수행과 정보주체의 권익을 보호하기 위하여 적법하고 적정하게 취급할 것입니다.
+                                <br>
+                                섭섭의 개인정보 처리방침은 「개인정보보호법」에 근거를 두고 있으며 정보통신서비스제공자가 준수하여야 할 관련 법령상의 개인정보보호 규정을 준수하며, 관련 법령에 의거한 개인정보 처리방침을 정하여 이용자 권익 보호에 최선을 다하고 있습니다.
+                                <br>
+                                섭섭은 귀하께서 섭섭의 개인정보보호방침 또는 이용약관의 내용에 대해 「동의합니다」버튼을 클릭하면 개인정보 수집에 대해 동의한 것으로 봅니다.
+                                </p>
+                        </div>
+                        
+                    </div>
+                    <br>
+                    <div class="signup-option">
+                        <input class="signup-box" type="checkbox" name="certified" id="admit">  동의합니다
+                    </div>
+                    
+                </div>
+                <br>
+                <div class="">
+                <button class="join-button" value="회원가입" onclick="signup()">회원가입</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+    <!-- 회원가입 화면 종료 -->
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+    <!-- footer 종료 -->
+    
+    <script>
+        function signup() {
+            let submit = new Map();
+            submit['name'] = document.getElementById('name').value;
+            submit['id'] = document.getElementById('id').value;
+            submit['pwd'] = document.getElementById('pwd').value;
+            submit['pwdconfirm'] = document.getElementById('pwdconfirm').value;
+            submit['sex'] = $("input[name='sex']:checked").val();
+            submit['address'] = document.getElementById('address').value;
+            submit['birthday'] = document.getElementById('birthday').value;
+            submit['phone'] = document.getElementById('phone').value;
+            submit['maketing-email'] = $("input[name='marketing-email']:checked").val();
+            submit['maketing-sms'] = $("input[name='marketing-sms']:checked").val();
+
+            console.log(submit);
+
+            if($("input:checkbox[name='certified']").is(":checked") == false) {
+                alert("이용약관에 동의해주시기 바랍니다.");
+                return;
+            }
+            const csrftoken = Cookies.get('csrftoken');
+            let url = "{% url 'signUpAPI' %}"
+            $.ajax({
+                url : url,
+                headers : {
+                    'X-CSRFToken' : csrftoken,
+                },
+                data : submit,
+                type: 'post',
+                // contentType : false,
+                // processData : false,
+                success : (res) => {
+                    alert("회원가입이 정상적으로 완료되었습니다.");
+                    console.log(res);
+                    window.location.href = "{% url 'main' %}";
+                },
+                error : (err) => {
+                    console.log(err);
+                    return;
+                }
+            })
+        }
+
+    </script>
+</body>
+
+<style>
+    #main {
+        margin: 3% 10% 5% 10%;
+    }
+
+    .join-button:hover {
+      color: white;
+      background-color: #a6c2cd;
+    }
+
+    .join-button {
+        border: 1.5px solid #757575;
+        color: #757575;
+        border-radius: 5px;
+        background-color: white;
+        width: 20%;
+        height: 40px;
+        font-size: medium;
+        text-decoration: none;
+        align-items: center;
+        font-family: 'MapoPeacefull';
+        position:relative;
+        cursor:pointer;
+        transition:800ms ease all;
+        outline:none;
+        margin: 0 auto;
+    }
+    .join-button:hover{
+        background:#fff;
+        border: none;
+        color : #ED1C24;
+        
+    }
+   
+    .join-button:before, .join-button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background:#ED1C24;
+    transition:400ms ease all;
+    }
+
+    .join-button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+    }
+
+    .join-button:hover:before, .join-button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+    }
+
+    .signupup{
+        font-family: 'MapoPeacefull';
+        font-size: 50px;
+        font-weight: 900;
+        color: #ED1C24;
+    }
+
+    h5{
+        margin: 25px 0px;
+    }
+
+    .signupinput{
+      border: 1px solid #ACACAC;
+      border-radius: 5px;
+      width: 50%;
+      max-width: 100%;
+      font-family: 'MapoPeacefull';
+      font-size: 15px;
+    }
+    .signup-promise{
+        border: 1px solid #ACACAC;
+        border-radius: 5px;
+        max-width: 100%;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    td input {
+        width: 50%;
+        font-family: 'MapoPeacefull';
+    }
+    .signup-title {
+        width: 30%;
+        font-family: 'MapoPeacefull';
+        font-weight: 400;
+        font-size: 19px;
+        color: #757575;
+    }
+    tr {
+        width: 100%;
+        height: 60px;
+        border-bottom: 1px solid  #ACACAC;
+        
+    }
+    .p2{
+        font-family: 'MapoPeacefull';
+        font-size: 15px;
+        font-weight: lighter;
+        color:  #ACACAC;
+    }
+    .signup-option{
+        font-family: 'MapoPeacefull';
+        font-size: 17px;
+        color: #757575;
+    }
+    .signup-box{
+        margin-left: 85%;
+    }
+
+    
+</style>
+
+</html>

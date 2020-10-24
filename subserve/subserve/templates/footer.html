@@ -1,0 +1,101 @@
+<style type = "text/css">
+
+    footer {
+        background-color: white;
+        color : #757575;
+        left:0px; 
+        bottom:0px; 
+        height:225px; 
+        width:100%;
+        position : relative;
+        bottom: 0px;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .text-muted{
+        text-align: center;
+
+    }
+
+    .container{
+        padding : 0px 0px;
+        display: inline-block;
+        margin : 67px 0px;
+    }
+
+    .float-right {
+      float: right;
+      padding-top: 5%;
+      height: 100%;
+      width: 100%;
+    }
+
+    .float-right a{
+      display: block;
+      width: 100%;
+      color : #757575;
+      padding-right : 10%;     
+      text-align: right;
+    }
+
+    .float-right a:hover{
+      text-decoration: none;
+    }
+
+    footer a{
+        color : #757575;
+        font-size : 20px;
+        width: 100%;
+        font-family: 'MapoPeacefull';
+    }
+
+    .footer-logogo{
+        position : relative;
+        bottom: 0px;
+        padding-top: 15%;
+        height: 100%;
+        opacity: 70%;
+    }
+
+    .footer-logogo :hover{
+      stroke: #ED1C24;
+    }
+
+    .text-muted{
+      border-top: 1px solid #757575;
+    }
+
+</style>
+
+<footer class="text-muted">
+    <a class="footer-logogo" href="{% url 'main'%}">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256.166" height="53.046" viewBox="0 0 256.166 53.046">
+        <defs>
+          <filter id="패스_83" x="0" y="0" width="256.166" height="53.046" filterUnits="userSpaceOnUse">
+            <feOffset dx="3" dy="3" input="SourceAlpha"/>
+            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+            <feFlood flood-opacity="0.157"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+          </filter>
+        </defs>
+        <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#패스_83)">
+          <path id="패스_83-2" data-name="패스 83" d="M9258.854-1035.293h30.8l-30.8-33.046,236.166.024" transform="translate(-9251.85 1075.34)" fill="none" stroke="#757575" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+        </g>
+      </svg>
+                    
+    </a>
+    <div class="footer-right">
+      <p class="float-right">
+          <a href="#">(주) SUBSERVE｜멋쟁이사자처럼 8기</a>
+          <a href="#">Contact : imnotmoon@likelion.org</a>
+          <a href="#">Address : 서울 강남구 봉은사로82길</a>
+      </p>
+    </div>
+    
+</footer>
+
+<style>
+
+</style>

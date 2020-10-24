@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>::::SUBSERVE::::</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css">
+    <!--<style>
+        @font-face {
+          font-family: 'MapoPeacefull';
+          src: url("{% static 'font/MapoPeacefull.ttf' %}");
+        }
+        * {
+          font-family: 'MapoPeacefull';
+        }
+    </style> -->
+</head>
+<body>
+    <!-- 상단 내비게이션 바 -->
+    {% include 'navbar.html' %}
+    <!-- 상단 내비게이션 바 종료 -->
+
+    <div class="row" id="main">
+    <!-- 좌측 사이드바 -->
+        {% include 'sidebar.html' %}
+        <!-- 좌측 사이드바 종료 -->
+
+        <!-- 중앙 카드 그리드 -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 maincenter">
+                <div id="rank-down">
+                    {% for store in stores.all  %}
+                        <div class="card bg-dark text-white">
+                            <img src="{{ store.photo.url }}" class="card-img brightness" alt="..." style="object-fit: cover; width: auto; height: 200px;">
+                            <div class="card-img-overlay">
+                                <h5><strong class="card-text">{{forloop.counter}}위</strong></h5>
+                                <h5 class="card-title"><a href="{% url 'detail' store.id %}">{{ store.storename }}</a></h5>
+                                <p class="card-text">{{store.description}}</p>
+                            </div>
+                        </div>
+                        <br>
+                {% endfor %}
+            </div>
+        </main>
+    <!-- 중앙 카드 그리드 종료 -->
+    </div>
+
+    <!-- 하단 footer -->
+    {% include 'footer.html' %}
+    <!-- 하단 footer 종료 -->
+
+     
+    <div class="topbutton">
+      <a href="#">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#A6C2CD" width="100px" height="100px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11.29 8.71L6.7 13.3c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 10.83l3.88 3.88c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L12.7 8.71c-.38-.39-1.02-.39-1.41 0z"/></svg>
+      </a>
+    </div>
+</body>
+</html>
+
+<style>
+  .topbutton{
+    position : fixed;
+    bottom: 25px;
+    right: 25px;
+  }
+
+  .textbottom{
+    position: absolute;
+    bottom: 30px;
+  }
+
+  .ml-sm-auto{
+    margin-left: 0px;
+  }
+
+  .text-muted{
+    text-align: right;
+    right: 0px;
+    position: relative;
+  }
+
+  .card {
+      height: 200px;
+  }
+
+  .brightness {-webkit-filter: brightness(0.30);filter: brightness(0.30);}
+
+</style>

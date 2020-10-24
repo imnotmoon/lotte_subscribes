@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh5AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>::::SUBSERVE::::</title>
+</head>
+<body>
+    <!-- navbar -->
+    {% include 'navbar.html' %}
+    <!-- navbar 종료 -->
+    <div class="row" id="main">
+    <!-- sidebar -->
+
+    <!-- sidebar 종료 -->
+    
+    <!-- 회원정보 화면 -->
+    {% if user.is_authenticated %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div>
+            <h2 class="mypage-name">'{{user.customer.name}}' 님의 회원 정보 </h2>
+            <br>
+            <hr>
+            <div class="user-info">
+                <h5 class="userinfo-1">아이디 </h5>
+                <h5 class="userinfo-2">｜  {{user.username}}</h5>
+            </div>
+            <hr>
+            <div class="user-info">
+                <h5 class="userinfo-1">성별
+                {% if user.customer.sex %}
+                <h5 class="userinfo-2">｜  남</h5>
+                {% else %}
+                <h5 class="userinfo-2">｜  여</h5>
+                {% endif %}
+            </div>
+            <hr>
+            <div class="user-info">
+                <h5 class="userinfo-1">휴대폰 번호</h5>
+                <h5 class="userinfo-2">｜  {{user.customer.phone}}</h5>
+            </div>
+            <hr>
+            <div class="user-info">
+                <h5 class="userinfo-1">이메일 주소 </h5>
+                <h5 class="userinfo-2">｜  이거 왜있지 안받았는데</h5>
+            </div>
+            <hr>
+            <div class="user-info">
+                <h5 class="userinfo-1">주소</h5>
+                <h5 class="userinfo-2">｜  {{user.customer.address}}</h5>
+            </div>
+            <hr>
+            <div class="user-info">
+                <h5 class="userinfo-1">생년월일</h5>
+                <h5 class="userinfo-2">｜  {{user.customer.birthday|date:'Y년 m월 d일'}}</h5>
+            </div>
+            <hr>
+            <div>
+                <h5 class="userinfo-1">SUB list</h5>
+                <table id="sublists">
+                    <th>메뉴이름</th>
+                    <th>구독종료일자</th>
+                </table>
+            </div>
+            <br>
+            <br>
+            
+            <br>
+        </div>
+        <div class="mypagebutton">
+                <button class="btn1" type="button"><a href="{% url 'editprofile' %}" style="color:#757575; font-size: medium;">회원정보 수정</a></button>
+                <button class="btn1" type="button"><a href="{% url 'confirmpassword' %}" style="color:#757575; font-size: medium;"> 회원 탈퇴</a></button>
+                <button class="btn1" type="button"><a href="{% url 'logout' %}" style="color:#757575; font-size: medium;">로그 아웃</a></button>
+        </div>
+    </main>
+    {% else %}
+    {% if error %}
+        <h3>{{error}}</h3>
+    {% endif %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" id="main">
+        <form action="{% url 'loginAPI' %}" method="POST">
+            {% csrf_token %}
+            <br>
+            <br>
+            <div class="sigincenter" style="padding-bottom: 50px;">
+                <h4 class="idpassword">ID</h4>
+                <input type="text" name="id" onclick="{this.value = ''}" id="input-id">
+                <br>
+                <br>
+                <h4 class="idpassword">Password</h4>
+                <input type="password" name="pw" id="input-password">
+            </div>
+            <div class="button-carrier">
+                <div>
+                    <button class="btn2" type="submit" style="color:#757575; font-size: medium;">로그인</button>
+                </div>
+                <div>
+                    <button class="btn2" type="button">
+                        <a href="{% url 'signup' %}" style="color: #757575; font-size: medium;">회원가입</a>
+                    </button>
+                </div>
+            </div>
+            <br>
+            <div class="checkbox-container" style="width: 30%; margin-left: 350px;">
+                <input type="checkbox" name="isManager" id="manager" value="1" style="margin-top: 3px;">
+                <label for="manager">저는 사장님입니다.</label>
+            </div>
+        </form>
+
+    </main>
+    {% endif %}
+
+    </div>
+
+   
+    <!-- 회원정보 화면 종료 -->
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+    <!-- footer 종료 -->
+    
+</body>
+
+<script>
+    window.onload = function() {
+        let url = "{% url 'sidebardata' %}";
+        const csrftoken = Cookies.get('csrftoken');
+        $.ajax({
+            url: url,
+            headers : {'X-CSRFToken' : csrftoken},
+            type: 'post',
+            success : (res) => {
+                res.forEach((subscribes) => {
+                    console.log(subscribes);
+                    $('#sublists').append('<tr><td><a href="" data-category="" class="sub-list">' + subscribes[0] + '</a></td> <td>' + (subscribes[1].split(' '))[0] + '</td><tr>')
+                })
+            },
+            error : (err) => {
+                console.log(err);
+                return;
+          }
+        })
+    }
+</script>
+<style>
+    .idpassword{
+        color: #ED1C24;
+        font-family: 'MapoPeacefull';
+        font-weight: 900;
+        margin-top: 10px;
+    }
+
+    .mypagebutton{
+        display: grid;
+        text-align: center; 
+        width: 60%;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin: 0 auto;
+    }
+    
+
+    *:focus {
+        outline: none;
+    }
+
+    input {
+        padding-left : 20px;
+    }
+
+    #input-id{
+        border-bottom: 2px solid #757575;
+        font-family: 'MapoPeacefull';
+        border-top-color: initial;
+        border-top-style: initial;
+        border-top-width: 0px;
+        border-right-color: initial;
+        border-right-style: initial;
+        border-right-width: 0px;
+        border-left-color: initial;
+        border-left-style: initial;
+        border-left-width: 0px;
+    }
+
+    #input-password{
+        border-bottom: 2px solid #757575;
+        font-family: 'MapoPeacefull';
+        border-top-color: initial;
+        border-top-style: initial;
+        border-top-width: 0px;
+        border-right-color: initial;
+        border-right-style: initial;
+        border-right-width: 0px;
+        border-left-color: initial;
+        border-left-style: initial;
+        border-left-width: 0px;
+    }
+
+    #main {
+        margin: 3% 10% 5% 10%;
+    }
+
+    body {
+        background-color: white;
+    }
+    .user-info {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+    }
+
+    .userinfo-1{
+        font-family: 'MapoPeacefull';
+        color: #757575;
+        font-size: 20px;
+        font-weight: 600;
+        margin: 8px 0px;
+    }
+
+    .userinfo-2{
+        font-family: 'MapoPeacefull';
+        color: #757575;
+        font-size: 17px;
+        font-weight: 500;
+        margin: 8px 0px;
+    }
+
+    .btn1 {
+        border: 1.5px solid #757575;
+        color: #757575;
+        border-radius: 5px;
+        background-color: white;
+        width: 70%;
+        height: 40px;
+        margin-left: 10%;
+        min-width: 130px;
+        font-size: medium;
+        text-decoration: none;
+        align-items: center;
+        font-family: 'MapoPeacefull';
+        position:relative;
+        cursor:pointer;
+        transition:800ms ease all;
+        outline:none;
+    }
+    .btn1:hover{
+        background:#fff;
+        border: none;
+        color : #ED1C24;
+        
+    }
+   
+    .btn1:before, .btn1:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background:#ED1C24;
+    transition:400ms ease all;
+    }
+
+    .btn1:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+    }
+
+    .btn1:hover:before, .btn1:hover:after{
+    width:100%;
+    transition:800ms ease all;
+    }
+
+    .btn2 {
+        border: 1.5px solid #757575;
+        color: #757575;
+        border-radius: 5px;
+        background-color: white;
+        width: 70%;
+        height: 40px;
+        margin-left: 10%;
+        font-size: medium;
+        text-decoration: none;
+        align-items: center;
+        font-family: 'MapoPeacefull';
+        position:relative;
+        cursor:pointer;
+        transition:800ms ease all;
+        outline:none;
+    }
+    .btn2:hover{
+        background:#fff;
+        border: none;
+        color : #ED1C24;
+        
+    }
+   
+    .btn2:before, .btn2:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background:#ED1C24;
+    transition:400ms ease all;
+    }
+
+    .btn2:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+    }
+
+    .btn2:hover:before, .btn2:hover:after{
+    width:100%;
+    transition:800ms ease all;
+    }
+
+    form{
+        padding-left: 30%;
+        padding-bottom: 50px;
+    }
+    a:hover{
+        color: white;
+        font-size: medium;
+        text-decoration: none;
+    }
+
+    .button-carrier {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 75%;
+    }
+
+    input {
+        width: 70%;
+    }
+
+    .mypage-name{
+        font-family: 'MapoPeacefull';
+        font-size: 50px;
+        font-weight: 900;
+        color: #757575;
+    }
+
+    .sub-list {
+        color: black;
+    }
+
+    table {
+        border: 1px solid #757575;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        color: #757575;
+    }
+
+    tr {
+        color: #757575;
+        
+    }
+    
+    td {
+        height: 60px;
+        border: 1px solid #757575;
+        color: #757575;
+    }
+
+    th {
+        border: 1px solid #757575;
+    }
+</style>
+
+<script>
+    
+</script>
+</html>
