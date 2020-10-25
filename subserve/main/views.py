@@ -14,7 +14,8 @@ from sublist.models import Subscribes
 # Create your views here.
 def main(request):
     stores=Store.objects.all()
-    return render(request, 'main.html', {'stores' : stores} )
+    menu = Menu.objects.all().order_by('rank')[:10]
+    return render(request, 'main.html', {'stores' : stores, 'carouselMenus':menu} )
 
 
 def search(request):

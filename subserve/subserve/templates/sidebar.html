@@ -3,7 +3,7 @@
 		<ul class="mmenu">
             <li>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'weekrank' %}" data-category="" class="sidebar-top">{{user.customer.name}}님 안녕하세요!</a>
+                    <a href="{% url 'mypage' %}" data-category="" class="sidebar-top">{{user.customer.name}}님 안녕하세요!</a>
                 {% else %}
                     <a href="{% url 'mypage' %}" data-category="" class="sidebar-top">로그인</a>
                 {% endif %}
@@ -14,17 +14,6 @@
 				<a data-menu="submenu" href="#" class="sidebar-top">sub list</a>
 				<ul class="smenu" id="sidebar-sublist">
                     <li><a href="" data-category="">· sub all</a></li>
-                </ul>
-            </li>
-            <hr>
-			<li>
-				<a data-menu="submenu" href="#" class="sidebar-top">wish list</a>
-				<ul class="smenu"><li><a href="" data-category="">· wish all</a></li>
-					<li><a href="" data-category="">· wish1</a></li>
-					<li><a href="" data-category="">· wish2</a></li>
-					<li><a href="" data-category="">· wish3</a></li>
-					<!--li><a href="/product/list.html?cate_no=50" data-category="50">pero 3 way</a></li-->
-					
                 </ul>
             </li>
             <hr>
@@ -41,16 +30,9 @@
             <hr>
 
             {% endif %}
-			<li>
-				<a data-menu="submenu" href="#" class="sidebar-top">category</a>
-				<ul class="smenu"><li><a href="" data-category="">· cate all</a></li>
-					<!--li><a href="/product/list.html?cate_no=53" data-category="53">neater</a></li-->
-					<li><a href="" data-category="">· cate1</a></li>
-					<li><a href="" data-category="">· cate2</a></li>
-					<li><a href="" data-category="">· cate3</a></li>
-				</ul></li>
-			
-			
+            <li>
+				<a data-menu="submenu" href="{% url 'weekrank' %}" class="sidebar-top">구독 랭킹</a>
+            </li>
         </ul>
     </div>
 </nav>
