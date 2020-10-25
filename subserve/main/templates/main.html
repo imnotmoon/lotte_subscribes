@@ -43,28 +43,28 @@
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <div class="carouselcss">
-                      <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                      <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#ED1C24"></rect></svg>
                       <div class="carousel-caption text-left">
-                        <h1 id="carousel1-title">{{ carouselMenus.0.menu_name }}</h1>
-                        <p id="carousel1-title">{{ carouselMenus.0.description}}</p>
+                        <h1 id="carousel1-title" class="caruousel-name">{{ carouselMenus.0.menu_name }}</h1>
+                        <p id="carousel1-title" class="caruousel-detail">{{ carouselMenus.0.description}}</p>
                       </div>
                     </div>
                   </div>
                   <div class="carousel-item">
                     <div class="carouselcss">
-                      <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                      <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#ED1C24"></rect></svg>
                       <div class="carousel-caption">
-                        <h1 id="carousel2-title">{{ carouselMenus.1.menu_name }}</h1>
-                        <p id="carousel2-text">{{ carouselMenus.1.description }}</p>
+                        <h1 id="carousel2-title" class="caruousel-name">{{ carouselMenus.1.menu_name }}</h1>
+                        <p id="carousel2-text" class="caruousel-detail">{{ carouselMenus.1.description }}</p>
                       </div>
                     </div>
                   </div>
                   <div class="carousel-item">
                     <div class="carouselcss">
-                      <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+                      <svg class="bd-placeholder-img" width="100%" height="270px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#ED1C24"></rect></svg>
                       <div class="carousel-caption text-right">
-                        <h1 id="carousel3-title">{{ carouselMenus.2.menu_name }}</h1>
-                        <p id="carousel3-text">{{ carouselMenus.2.description }}</p>
+                        <h1 id="carousel3-title"class="caruousel-name">{{ carouselMenus.2.menu_name }}</h1>
+                        <p id="carousel3-text" class="caruousel-detail">{{ carouselMenus.2.description }}</p>
                       </div>
                     </div>
                   </div>
@@ -223,4 +223,19 @@
     right: 30px;
     bottom: 30px;
   }
+  .caruousel-name{
+    font-family: 'MapoPeacefull';
+    font-size: 65px;
+    font-weight: 900;
+  }
+  .caruousel-detail{
+    font-family: 'MapoPeacefull';
+    font-size: 25px;
+    font-weight: 500;
+  }
+  .bd-placeholder-img{
+    filter: brightness(0.95);
+  }
+
+
 </style>
