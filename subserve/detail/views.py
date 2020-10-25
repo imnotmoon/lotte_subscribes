@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from .forms import StoreForm
 from django.utils import timezone
 from datetime import datetime
+from datetime import timedelta
 # Create your views here.
 def detail(request, storeID) :
     #store = Store.objects.filter(id = storeID)
