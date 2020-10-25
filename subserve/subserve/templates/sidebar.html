@@ -13,7 +13,7 @@
 			<li>
 				<a data-menu="submenu" href="#" class="sidebar-top">sub list</a>
 				<ul class="smenu" id="sidebar-sublist">
-                    <li><a href="" data-category="">· sub all</a></li>
+                    <li><a href="{% url 'mypage' %}" data-category="">· sub all</a></li>
                 </ul>
             </li>
             <hr>
@@ -121,7 +121,7 @@
             success : (res) => {
                 res.forEach((subscribes) => {
                     console.log(subscribes)
-                    $('#sidebar-sublist').append('<li><a href="" data-category="">· ' + subscribes[0] + '</a></li>')
+                    $('#sidebar-sublist').append('<li><a href="{% url "mypage" %}" data-category="">· ' + subscribes[0] + '</a></li>')
                 })
             },
             error : (err) => {
