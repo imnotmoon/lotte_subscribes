@@ -6,7 +6,7 @@
 <br><br>
 ## "subsribe to service in LOTTE"
 
-<br><br>
+<br>
 
 **주요 서비스**
  - 지속적인 구독 서비스
@@ -61,4 +61,47 @@
 </ol>
 
 
-**실행 방법**
+**실행 방법**<br>
+Master branch를 pull 받는다.
+
+🔹 **로컬에서 실행**
+```
+터미널을 실행시킨다
+python -m venv myvenv(가상환경 이름)
+source myvenv/Scripts/activate
+pip install Django
+python -m pip install Pillow
+cd subserve
+python manage.py runserver
+링크(ex: http://127.0.0.1:8000/) 클릭
+
+```
+
+🔹 **배포 설정**
+```
+Amazon EB(Elastic Beanstalk)
+Python version 3.6.8
+Django==2.1.1
+pytz==2020.1
+```
+<br>
+
+🔹 **추가사항** <br>
+결제기능을 실행하고싶다면 [iamport](https://www.iamport.kr/getstarted)로 이동하여 IMP를 발급받은 후 <br>
+subserve > detail > templates > subscribe.html 15 line을 수정하십시오.
+
+<br>
+
+**앱 구조 설명**  <br>
+<ol>
+ <li> customer : user의 로그인, 회원가입, 마이페이지 등의 페이지 </li>
+ <li> datail : 가게 메뉴 구독, 결제 등의 상세 페이지 </li>
+ <li> main : 메인 페이지(외 검색, 위치, 주간랭킹) </li>
+ <li> subserve : navbar, footer, sidebar </li>
+</ol>
+
+<br>
+
+**프로젝트 contribute 방법** <br>
+코드 컨벤션을 확인해주신 후 규칙에 따라 작성해주시고, <br>
+오타, 버그 픽스, PR 의견 제시 등은 Issues를 통해 알려주시길 바랍니다!!
